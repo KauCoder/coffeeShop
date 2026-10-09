@@ -1,123 +1,35 @@
-const orderList = document.getElementById("orderList");
-const moneyInput = document.getElementById("money");
-const balanceDisplay = document.getElementById("balanceDisplay");
-const buttons = document.querySelectorAll(".coffee");
-
-let balance = 0;
-
-const dialog = document.createElement("dialog");
-dialog.id = "beautifulAlert";
-dialog.innerHTML = `
-    <h2 id="dialogMessage" style="margin-top: 0; font-weight: normal;"></h2>
-    <div id="dialogActions" style="margin-top: 20px; display: flex; justify-content: center; gap: 15px;">
-        <button id="dialogConfirmBtn">OK</button>
-        <button id="dialogCancelBtn">Cancel</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffSipGo</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h1 style="animation: dance infinite 1s ease-in-out; text-align: center;">Orders</h1>
+            <br>
+            <ul id="orderList"></ul>
+        </aside>
+        <main class="main-content">
+            <h1>Welcome to CoffSipGo!</h1>
+            <input id="money" type="number" placeholder="Enter your dollars..." />
+            <p id="balanceDisplay">Your balance: $0</p>
+            <hr>
+            <h2>What would you like to order?</h2>
+            <div class="options">
+                <button id="regCoffee" class="coffee" data-price="1">Regular Coffee ($1)</button>
+                <button id="blackCoffee" class="coffee" data-price="2">Black Coffee ($2)</button>
+                <button id="espresso" class="coffee" data-price="3">Espresso ($3)</button>
+                <button id="cappuccino" class="coffee" data-price="4">Cappuccino ($4)</button>
+                <button id="frenchVanilla" class="coffee" data-price="5">French Vanilla ($5)</button>
+            </div>
+        </main>
     </div>
-`;
-document.body.appendChild(dialog);
 
-const dialogMessage = document.getElementById("dialogMessage");
-const dialogConfirmBtn = document.getElementById("dialogConfirmBtn");
-const dialogCancelBtn = document.getElementById("dialogCancelBtn");
-
-function showCustomAlert(message) {
-    return new Promise((resolve) => {
-        dialogMessage.textContent = message;
-        dialogCancelBtn.style.display = "none";
-        dialogConfirmBtn.textContent = "OK";
-        
-        const handleClose = () => {
-            dialog.close();
-            dialogConfirmBtn.removeEventListener("click", handleClose);
-            resolve();
-        };
-        
-        dialogConfirmBtn.addEventListener("click", handleClose);
-        dialog.showModal();
-    });
-}
-
-function showCustomConfirm(message) {
-    return new Promise((resolve) => {
-        dialogMessage.textContent = message;
-        dialogCancelBtn.style.display = "inline-block";
-        dialogConfirmBtn.textContent = "Yes";
-        
-        const handleConfirm = () => {
-            cleanup();
-            resolve(true);
-        };
-        
-        const handleCancel = () => {
-            cleanup();
-            resolve(false);
-        };
-        
-        const cleanup = () => {
-            dialog.close();
-            dialogConfirmBtn.removeEventListener("click", handleConfirm);
-            dialogCancelBtn.removeEventListener("click", handleCancel);
-        };
-        
-        dialogConfirmBtn.addEventListener("click", handleConfirm);
-        dialogCancelBtn.addEventListener("click", handleCancel);
-        dialog.showModal();
-    });
-}
-
-function updateBalance() {
-    balanceDisplay.textContent = `Your balance: $${balance}`;
-}
-
-moneyInput.addEventListener("keydown", async (e) => {
-    if (e.key === "Enter") {
-        const entered = parseFloat(moneyInput.value);
-        if (!isNaN(entered) && entered >= 0) {
-            balance = entered;
-            updateBalance();
-            moneyInput.value = "";
-        } else {
-            await showCustomAlert("Please enter a valid number!");
-        }
-    }
-});
-
-function sleep(seconds) {
-    return new Promise(resolve => setTimeout(resolve, seconds * 1000));
-}
-
-async function makeCoffee(coffeeName, price) {
-    const li = document.createElement("li");
-    li.textContent = `${coffeeName} state: (preparing...)`;
-    li.classList.add("preparing");
-    orderList.appendChild(li);
-
-    await showCustomAlert(`Your ${coffeeName} is coming right up!`);
-
-    await sleep(5);
-
-    li.textContent = `${coffeeName} state: (ready!)`;
-    li.classList.remove("preparing");
-    await showCustomAlert(`Your ${coffeeName} is ready!`);
-
-    li.remove();
-}
-
-buttons.forEach(button => {
-    button.addEventListener("click", async () => {
-        const coffeeName = button.textContent.split(" (\$")[0];
-        const price = parseInt(button.dataset.price);
-
-        if (balance < price) {
-            await showCustomAlert(`Not enough money! ${coffeeName} costs $${price}, while you have $${balance}`);
-            return;
-        }
-
-        const confirmBuy = await showCustomConfirm(`Are you sure you want to order a ${coffeeName}?`);
-        if (!confirmBuy) return;
-
-        balance -= price;
-        updateBalance();
-        makeCoffee(coffeeName, price);
-    });
-});
+    <script src="script.js"></script>
+</body>
+</html>
