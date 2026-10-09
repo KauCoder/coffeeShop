@@ -105,7 +105,7 @@ async function makeCoffee(coffeeName, price) {
 
 buttons.forEach(button => {
     button.addEventListener("click", async () => {
-        const coffeeName = button.textContent.split(" (\$");
+        const coffeeName = button.textContent.split(" (\$")[0];
         const price = parseInt(button.dataset.price);
 
         if (balance < price) {
