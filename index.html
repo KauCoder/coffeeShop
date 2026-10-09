@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffSipGo</title>
+    <link rel="stylesheet" href="coffeeShop.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h1 style="animation: dance infinite 1s ease-in-out; text-align: center;">Orders</h1>
+            <br>
+            <ul id="orderList"></ul>
+        </aside>
+        <main class="main-content">
+            <h1>Welcome to CoffSipGo!</h1>
+            <input id="money" type="number" placeholder="Enter your dollars..." />
+            <p id="balanceDisplay">Your balance: $0</p>
+            <img src="CoffSipGo_Logo.png" width="300" height="200" alt="CoffSipGo Logo">
+            <hr>
+            <h2>What would you like to order?</h2>
+            <div class="options">
+                <button id="regCoffee" class="coffee" data-price="1">Regular Coffee ($1)</button>
+                <button id="blackCoffee" class="coffee" data-price="2">Black Coffee ($2)</button>
+                <button id="espresso" class="coffee" data-price="3">Espresso ($3)</button>
+                <button id="cappuccino" class="coffee" data-price="4">Cappuccino ($4)</button>
+                <button id="frenchVanilla" class="coffee" data-price="5">French Vanilla ($5)</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="coffeeShop.js"></script>
+</body>
+</html>
