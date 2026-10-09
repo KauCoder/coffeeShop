@@ -67,18 +67,20 @@ button {
 
 button:hover {
     cursor: pointer;
-    transition: 0.5s ease-out;
+    transition: 0.1s ease-out;
     transform: scale(1.1);
 }
 
 button:active {
-    transition: 0.5s ease-in;
+    transition: 0.1s ease-in;
     transform: scale(0.9);
+    
 }
 
 #money {
     padding: 10px;
     font-size: 16px;
+    text-colour: green;
     margin-bottom: 10px;
     border-radius: 5px;
     border: 2px solid black;
