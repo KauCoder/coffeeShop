@@ -67,12 +67,12 @@ button {
 
 button:hover {
     cursor: pointer;
-    transition: 0.05s ease-out;
+    transition: 0.08s ease-out;
     transform: scale(1.1);
 }
 
 button:active {
-    transition: 0.1s ease-in;
+    transition: 0.08s ease-in;
     transform: scale(0.9);
     
 }
