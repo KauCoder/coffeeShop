@@ -1,0 +1,90 @@
+@keyframes dance {
+    0% { transform: translateX(10px) rotate(3deg); }
+    50% { transform: translateX(-20px) rotate(-6deg); }
+    100% { transform: translateX(8px) rotate(3deg); }
+}
+
+body {
+    background-color: rgb(255, 228, 196);
+    color: red;
+    margin: 0;
+    font-family: Lobster;
+}
+ 
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    position: relative;
+    width: 200px;
+    background-color: rgb(255, 228, 196);
+    padding: 20px;
+}
+
+.sidebar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #ccc;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    background-color: #fff;
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.preparing {
+    animation: dance infinite 0.8s ease-in-out;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+button {
+    background-color: rgb(255, 240, 222);
+    border: 2px solid black;
+    color: red;
+    padding: 20px;
+    font-size: large;
+    border-radius: 5px;
+    font-family: Lobster;
+}
+
+button:hover {
+    cursor: pointer;
+    transition: 0.5s ease-out;
+    transform: scale(1.1);
+}
+
+button:active {
+    transition: 0.5s ease-in;
+    transform: scale(0.9);
+}
+
+#money {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+#balanceDisplay {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
